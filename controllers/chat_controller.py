@@ -1,17 +1,17 @@
-import os
+# import os
 
 from dotenv import load_dotenv
 from flask import Blueprint, render_template, request
 from openai import OpenAI
 
 from language_models.open_ai.OpenAIHandler import OpenAIHandler
-from language_models.vertex_ai import vertex_ai
+# from language_models.vertex_ai import vertex_ai
 
 load_dotenv()
 
 chat_controller = Blueprint("chat_controller", __name__)
 client = OpenAI()
-
+ 
 chat_history = [{"role": "system", "content": "You are a helpful assistant."}]
 
 
