@@ -5,7 +5,7 @@ from flask import Blueprint, render_template, request
 from openai import OpenAI
 
 from language_models.open_ai.OpenAIHandler import OpenAIHandler
-# from language_models.vertex_ai import vertex_ai
+# from language_models.gcloud import gcloud
 
 load_dotenv()
 
@@ -33,6 +33,6 @@ def index():
 #     prompt = request.args.get("prompt")
 #     service = os.environ.get('K_SERVICE', 'Unknown service')
 #     revision = os.environ.get('K_REVISION', 'Unknown revision')
-#     response = vertex_ai.run(prompt)
+#     response = gcloud.run(prompt)
 #
 #     return render_template('index.html', message=response.text, Service=service, Revision=revision)

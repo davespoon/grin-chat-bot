@@ -3,8 +3,8 @@ import vertexai
 from vertexai.language_models import TextGenerationModel
 
 
-def run(prompt):
-    vertexai.init(project='pure-toolbox-39006', location='us-central1')
+def get_completion(prompt, project, location):
+    vertexai.init(project=project, location=location)
     parameters = {
         "temperature": 0.2,
         "max_output_tokens": 256,
