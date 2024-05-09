@@ -34,12 +34,19 @@ def extract_sentences_from_pdf(pdf_path):
     return sentences
 
 
+def get_vertex_ai_embeddings_model(project, location):
+    aiplatform.init()
+    model = TextEmbeddingModel.from_pretrained("textembedding-gecko@003")
+
+
 def generate_text_embeddings(sentences, project, location) -> list:
     aiplatform.init(project=project, location=location)
     model = TextEmbeddingModel.from_pretrained("textembedding-gecko@003")
     embeddings = model.get_embeddings(sentences)
     vectors = [embedding.values for embedding in embeddings]
     return vectors
+
+
 
 
 def generate_and_save_embeddings(pdf_path, sentence_file_path, embed_file_path, project, location):

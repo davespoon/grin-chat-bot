@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from google.cloud import aiplatform
 
-from language_models.gcloud.vertex_ai_api_helper import (
+from helpers.vertex_ai_api_helper import (
     generate_and_save_embeddings,
     get_model_from_platform, load_sentence, generate_text_embeddings, generate_context)
 
@@ -11,7 +11,7 @@ load_dotenv()
 
 project = os.getenv("GCP_PROJECT")
 location = "europe-north1"
-pdf_path = "ApplePie.pdf"
+pdf_path = "data/ApplePie.pdf"
 bucket_name = "grin-chat-bot-bucket"
 embed_file_path = "grin-chat-bot-embed.json"
 sentence_file_path = "grin-chat-bot-sentence.json"
