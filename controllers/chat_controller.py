@@ -1,10 +1,6 @@
-# import os
-
 from dotenv import load_dotenv
 from flask import (render_template, request, Response, stream_with_context, jsonify, Blueprint)
 from openai import OpenAI
-
-from language_models.open_ai.OpenAIHandler import OpenAIHandler
 
 load_dotenv()
 
@@ -21,12 +17,6 @@ def index():
 
 @chat_controller.route("/chat", methods=["POST"])
 def chat():
-    # content = request.form["message"]
-    # chat_history.append({"role": "user", "content": content})
-    # assistant_response_content = OpenAIHandler.get_assistant_response(chat_history)
-    # chat_history.append({"role": "assistant", "content": assistant_response_content})
-    # return render_template("index.html", chat_history=chat_history)
-
     content = request.json["message"]
     chat_history.append({"role": "user", "content": content})
     return jsonify(success=True)
