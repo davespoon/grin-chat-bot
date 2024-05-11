@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-from backend import response
+from response_handler import response
 
 app = Flask(__name__)
 
