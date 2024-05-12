@@ -27,7 +27,7 @@
                             <span class="online_icon"></span>
                         </div>
                         <div class="user_info">
-                            <span>Grin's ChatBot</span>
+                            <span>Grin's Video Games History ChatBot</span>
                             <p>Ok, so what you wanna know?</p>
                         </div>
                     </div>
@@ -79,8 +79,15 @@
                 hideLoading();
             })
             event.preventDefault();
+            scrollToBottom();
         });
     });
+
+    function scrollToBottom() {
+        // Scroll to the bottom of the message container
+        var $messageContainer = $("#messageFormeight");
+        $messageContainer.scrollTop($messageContainer[0].scrollHeight);
+    }
 
     function loading() {
         $("#loading").show();

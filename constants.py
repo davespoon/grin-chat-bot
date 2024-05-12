@@ -1,2 +1,3 @@
 DATA_PATH = "data"
 CHROMA_PATH = "chroma"
+CHAT_HISTORY_SIZE = 20
