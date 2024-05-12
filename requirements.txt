@@ -31,3 +31,4 @@ unstructured-inference
 pikepdf
 beautifulsoup4~=4.12.3
 langsmith~=0.1.56
+langchain-pinecone~=0.1.0
