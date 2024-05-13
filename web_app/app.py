@@ -1,12 +1,8 @@
 from flask import Flask, render_template, request
-from langchain_core.messages import HumanMessage
 
 from response_handler import response
 
 app = Flask(__name__)
-
-
-# chat_history = ["You are polite and helpful assistant"]
 
 
 @app.route('/')
