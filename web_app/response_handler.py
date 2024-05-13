@@ -12,19 +12,21 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langsmith import Client
 
 import constants
-from helpers import db_helper
+from helpers import db_helper, llm_helper
 from prompts import prompt_templates
 
+chat_history = []
 
-def response(human_input, chat_history):
-    load_dotenv()
+
+def response(human_input):
+    # load_dotenv()
     langchain_client = Client
-    openai_api_key = os.getenv("OPENAI_API_KEY")
 
     vectorstore = db_helper.get_chroma_db(OpenAIEmbeddings(), constants.CHROMA_PATH)
 
-    retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 3})
-    model = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0, openai_api_key=openai_api_key)
+    retriever = vectorstore.as_retriever(search_type=constants.SEARCH_TYPE,
+                                         search_kwargs={"k": constants.SEARCH_K})
+    model = llm_helper.get_chat_openai()
     # template = prompt_templates.base_template
     # prompt = ChatPromptTemplate.from_template(template)
 
@@ -60,7 +62,7 @@ def response(human_input, chat_history):
     response_msg = rag_chain.invoke({"input": human_input, "chat_history": chat_history})
 
     chat_history.extend([HumanMessage(content=human_input), response_msg["answer"]])
-    if chat_history.size > constants.CHAT_HISTORY_SIZE:
+    if len(chat_history) > constants.CHAT_HISTORY_SIZE:
         chat_history.pop(0)
 
-    return response_msg
+    return response_msg["answer"]
