@@ -1,3 +1,4 @@
+from dependency_injector.wiring import inject
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.history_aware_retriever import create_history_aware_retriever
 from langchain.chains.retrieval import create_retrieval_chain
@@ -7,21 +8,21 @@ from langchain_openai import OpenAIEmbeddings
 from langsmith import Client
 
 import constants
-from helpers import db_helper, llm_helper
+from helpers import db_helper
 from prompts import prompt_templates
 
 chat_history = []
 
 
-def response(human_input):
-    # load_dotenv()
+@inject
+def response(human_input, chat_openai):
     langchain_client = Client
-
     vectorstore = db_helper.get_chroma_db(OpenAIEmbeddings(), constants.CHROMA_PATH)
-
     retriever = vectorstore.as_retriever(search_type=constants.SEARCH_TYPE,
                                          search_kwargs={"k": constants.SEARCH_K})
-    model = llm_helper.get_chat_openai()
+    # model = llm_helper.get_chat_openai()
+    model = chat_openai
+
     # template = prompt_templates.base_template
     # prompt = ChatPromptTemplate.from_template(template)
 
@@ -56,6 +57,7 @@ def response(human_input):
     rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
     response_msg = rag_chain.invoke({"input": human_input, "chat_history": chat_history})
 
+    chat_history.append(HumanMessage(content=human_input))
     chat_history.extend([HumanMessage(content=human_input), response_msg["answer"]])
     if len(chat_history) > constants.CHAT_HISTORY_SIZE:
         chat_history.pop(0)
