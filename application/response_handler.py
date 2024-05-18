@@ -17,22 +17,10 @@ chat_history = []
 @inject
 def response(human_input, chat_openai, chroma_db: VectorStore = Provide[Container.chroma_db]):
     langchain_client = Client
-    # vectorstore = db_helper.get_chroma_db(OpenAIEmbeddings(), constants.CHROMA_PATH)
     vectorstore = chroma_db
     retriever = vectorstore.as_retriever(search_type=constants.SEARCH_TYPE,
                                          search_kwargs={"k": constants.SEARCH_K})
-    # model = llm_helper.get_chat_openai()
     model = chat_openai
-
-    # template = prompt_templates.base_template
-    # prompt = ChatPromptTemplate.from_template(template)
-
-    # chain = (
-    #         {"context": retriever, "input": RunnablePassthrough()}
-    #         | prompt
-    #         | model
-    #         | StrOutputParser()
-    # )
 
     contextualize_q_prompt = ChatPromptTemplate.from_messages(
         [
