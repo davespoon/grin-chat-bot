@@ -15,7 +15,7 @@ def get_chroma_db(embedding_model, persist_directory):
     if embeddings_exist(persist_directory):
         return Chroma(embedding_function=embedding_model, persist_directory=persist_directory)
     else:
-        docs = doc_helper.load_documents(constants.DATA_PATH)
+        docs = doc_helper.load_online_pdf(constants.WEB_PDF_URI)
         chunks = doc_helper.split_text(docs)
         vectorstore = create_chroma_db(chunks, embedding_model, persist_directory)
         return vectorstore

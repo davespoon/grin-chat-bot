@@ -1,6 +1,7 @@
 from dependency_injector import containers, providers
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
+import constants
 from helpers.db_helper import get_chroma_db
 
 
@@ -14,8 +15,8 @@ class Container(containers.DeclarativeContainer):
 
     chat_openai = providers.Singleton(
         ChatOpenAI,
-        model="gpt-3.5-turbo",
-        temperature=0,
+        model=constants.MODEL,
+        temperature=constants.TEMPERATURE,
         openai_api_key=config.api_key
     )
 

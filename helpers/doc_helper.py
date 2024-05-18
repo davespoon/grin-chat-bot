@@ -1,6 +1,6 @@
 import os
 
-from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader, UnstructuredPDFLoader
+from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader, UnstructuredPDFLoader, OnlinePDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
@@ -12,6 +12,11 @@ def load_documents(directory):
         raw_documents = loader.load()
         all_documents.extend(raw_documents)
         return all_documents
+
+
+def load_online_pdf(uri):
+    loader = OnlinePDFLoader(uri)
+    return loader.load()
 
 
 def load_pdf(path):
