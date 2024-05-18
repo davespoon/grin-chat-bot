@@ -1,11 +1,17 @@
-from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader
+import os
+
+from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader, UnstructuredPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 def load_documents(directory):
-    loader = DirectoryLoader(directory)
-    documents = loader.load()
-    return documents
+    loaders = [UnstructuredPDFLoader(os.path.join(directory, fn)) for fn in os.listdir(directory)]
+    all_documents = []
+
+    for loader in loaders:
+        raw_documents = loader.load()
+        all_documents.extend(raw_documents)
+        return all_documents
 
 
 def load_pdf(path):

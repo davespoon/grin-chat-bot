@@ -1,23 +1,24 @@
-from dependency_injector.wiring import inject
+from dependency_injector.wiring import inject, Provide
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.history_aware_retriever import create_history_aware_retriever
 from langchain.chains.retrieval import create_retrieval_chain
 from langchain_core.messages import HumanMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_openai import OpenAIEmbeddings
+from langchain_core.vectorstores import VectorStore
 from langsmith import Client
 
 import constants
-from helpers import db_helper
+from containers import Container
 from prompts import prompt_templates
 
 chat_history = []
 
 
 @inject
-def response(human_input, chat_openai):
+def response(human_input, chat_openai, chroma_db: VectorStore = Provide[Container.chroma_db]):
     langchain_client = Client
-    vectorstore = db_helper.get_chroma_db(OpenAIEmbeddings(), constants.CHROMA_PATH)
+    # vectorstore = db_helper.get_chroma_db(OpenAIEmbeddings(), constants.CHROMA_PATH)
+    vectorstore = chroma_db
     retriever = vectorstore.as_retriever(search_type=constants.SEARCH_TYPE,
                                          search_kwargs={"k": constants.SEARCH_K})
     # model = llm_helper.get_chat_openai()

@@ -6,7 +6,6 @@ from containers import Container
 from application.response_handler import response
 
 
-@inject
 def index():
     return render_template('index.html')
 
