@@ -1,4 +1,4 @@
-# Document Chat Application
+# Chat with your pdf
 
 This is a simple chat application that interacts with your documents, powered by LangChain and OpenAI. This project serves as a Retrieval-Augmented Generation (RAG) example.
 
@@ -49,6 +49,6 @@ To use this application, you will need:
 
    Note that because of initial creating vectore store, the first query may take longer to process, depending on the size of your documents. For example, the default video game history book is 624 pages long, so please be patient.
 
-6. **Enjoy!**
+6. **Run**
 
-   Have fun exploring and interacting with your documents!
+   To run app just 
