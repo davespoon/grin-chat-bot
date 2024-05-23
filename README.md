@@ -52,6 +52,8 @@ To use this application, you will need:
    python application/app.py
    ```
 
+   Your chat should be available under http://127.0.0.1:5000
+
 6. **Default Document**
 
    By default, the project loads "The Ultimate History of Video Games" book by Steven L. Kent. You can ask any question regarding this exciting topic!
