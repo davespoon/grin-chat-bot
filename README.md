@@ -12,7 +12,7 @@ To use this application, you will need:
 
 ## Setup
 
-1. **Using terminal**
+1. **Venv and dependencies**
 
    In terminal go to project's root folder and activate venv:
    ```bash
