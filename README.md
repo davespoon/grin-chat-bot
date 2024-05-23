@@ -16,6 +16,7 @@ To use this application, you will need:
 
    In terminal go to project's root folder and activate venv:
    `python -m venv venv`
+   
    `venv\Scripts\activate`
 
    Install the necessary dependencies from `requirements.txt`:
