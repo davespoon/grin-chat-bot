@@ -15,11 +15,13 @@ To use this application, you will need:
 1. **Install Dependencies**
 
    In terminal go to project's root folder and activate venv:
-   
-   `python -m venv venv`
-   
-   `venv\Scripts\activate`
-
+   ```bash
+   python -m venv venv
+   ```
+   ```bash
+   venv\Scripts\activate
+   ```
+  
    Install the necessary dependencies from `requirements.txt`:
 
    ```bash
