@@ -8,11 +8,15 @@ To use this application, you will need:
 
 - An OpenAI API account
 - A LangChain account (for LangSmith integration, if desired)
-- Python 3.11
+- Python 3.11.9
 
 ## Setup
 
 1. **Install Dependencies**
+
+   In terminal go to project's root folder and activate venv:
+   `python -m venv venv`
+   `venv\Scripts\activate`
 
    Install the necessary dependencies from `requirements.txt`:
 
@@ -20,7 +24,7 @@ To use this application, you will need:
    pip install -r requirements.txt
    ```
 
-2. **Create .env File**
+3. **Create .env File**
 
    Create a `.env` file in the root directory of your project with the following variables:
 
@@ -37,19 +41,19 @@ To use this application, you will need:
    LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
    ```
 
-3. **Default Document**
+4. **Default Document**
 
    By default, the project loads "The Ultimate History of Video Games" book by Steven L. Kent. You can ask any question regarding this exciting topic!
 
-4. **Customization**
+5. **Customization**
 
    - **Constants File**: You can change values in the `constants.py` file to use a different URI for your document.
    - **Data Folder**: Alternatively, upload your own documents to the `data` folder and load them from there.
 
-5. **First Query**
+6. **First Query**
 
    Note that because of initial creating vectore store, the first query may take longer to process, depending on the size of your documents. For example, the default video game history book is 624 pages long, so please be patient.
 
-6. **Run**
+7. **Run**
 
    To run app just 
