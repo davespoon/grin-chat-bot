@@ -8,6 +8,7 @@ To use this application, you will need:
 
 - An OpenAI API account
 - A LangChain account (for LangSmith integration, if desired)
+- Python 3.11
 
 ## Setup
 
