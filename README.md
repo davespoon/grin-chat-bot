@@ -19,7 +19,8 @@ To use this application, you will need:
    python -m venv venv
    ```
    ```bash
-   venv\Scripts\activate
+   source venv/bin/activate  # On macOS/Linux
+   venv\Scripts\activate  # On Windows
    ```
   
    Install the necessary dependencies from `requirements.txt`:
