@@ -48,6 +48,13 @@ To use this application, you will need:
 
 4. **Run**
 
+   You need to add project's root path to your PYTHONPATH env variable. 
+   ```bash
+   export PYTHONPATH=/path/to/your/source:$PYTHONPATH  # On macOS/Linux
+   ```
+   For Windows first create path variable PYTHONPATH and add project's root folder
+    ![image](https://github.com/davespoon/grin-chat-bot/assets/19663851/1a0c7140-7578-4b73-b994-e9dbf806ec38)
+
    ```bash
    python application/app.py
    ```
