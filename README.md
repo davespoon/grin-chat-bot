@@ -76,6 +76,4 @@ To use this application, you will need:
 
    Note that because of initial creating vectore store, the first query may take longer to process, depending on the size of your documents. For example, the default video game history book is 624 pages long, so please be patient.
 
- 
-
-   To run app just 
+9. **Enjoy!**
