@@ -46,19 +46,25 @@ To use this application, you will need:
    LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
    ```
 
-4. **Default Document**
+4. **Run**
+
+   ```bash
+   python application/app.py
+   ```
+
+6. **Default Document**
 
    By default, the project loads "The Ultimate History of Video Games" book by Steven L. Kent. You can ask any question regarding this exciting topic!
 
-5. **Customization**
+7. **Customization**
 
    - **Constants File**: You can change values in the `constants.py` file to use a different URI for your document.
    - **Data Folder**: Alternatively, upload your own documents to the `data` folder and load them from there.
 
-6. **First Query**
+8. **First Query**
 
    Note that because of initial creating vectore store, the first query may take longer to process, depending on the size of your documents. For example, the default video game history book is 624 pages long, so please be patient.
 
-7. **Run**
+ 
 
    To run app just 
