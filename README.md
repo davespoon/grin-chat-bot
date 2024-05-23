@@ -53,7 +53,7 @@ To use this application, you will need:
    export PYTHONPATH=/path/to/your/source:$PYTHONPATH  # On macOS/Linux
    ```
    For Windows first create path variable PYTHONPATH and add project's root folder
-  <img src="https://github.com/davespoon/grin-chat-bot/assets/19663851/56f8be8c-9b77-427f-8b77-0615b46a25b4" alt="path" width="50%">
+  <img src="https://github.com/davespoon/grin-chat-bot/assets/19663851/56f8be8c-9b77-427f-8b77-0615b46a25b4" alt="path" width="10%">
 
    And finaly run:
    
