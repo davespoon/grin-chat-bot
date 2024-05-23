@@ -53,8 +53,8 @@ To use this application, you will need:
    export PYTHONPATH=/path/to/your/source:$PYTHONPATH  # On macOS/Linux
    ```
    For Windows first create path variable PYTHONPATH and add project's root folder
-    ![image](https://github.com/davespoon/grin-chat-bot/assets/19663851/1a0c7140-7578-4b73-b994-e9dbf806ec38)
-
+   ![image](https://github.com/davespoon/grin-chat-bot/assets/19663851/56f8be8c-9b77-427f-8b77-0615b46a25b4)
+   
    ```bash
    python application/app.py
    ```
