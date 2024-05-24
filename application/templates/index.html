@@ -42,10 +42,17 @@
                     <form id="messageArea" class="input-group">
                         <input type="text" id="text" name="msg" placeholder="Type your message..." autocomplete="off"
                                class="form-control type_msg" required/>
+
                         <div class="input-group-append">
                             <button type="submit" id="send" class="input-group-text send_btn" onclick="loading()"><i
                                     class="fas fa-location-arrow"></i></button>
                         </div>
+                    </form>
+                    <form id="upload-form" method="post" enctype="multipart/form-data">
+                        <label for="file">Choose Your File</label>
+                        <input type="file" name="file" id="file">
+                        <span id="file-name">No file chosen</span>
+                        <button type="submit">Upload</button>
                     </form>
                 </div>
             </div>
@@ -55,6 +62,13 @@
 
 <script>
     $(document).ready(function () {
+    const fileInput = document.getElementById('file');
+    const fileNameDisplay = document.getElementById('file-name');
+
+    fileInput.addEventListener('change', function() {
+        const fileName = this.files.length ? this.files[0].name : 'No file chosen';
+        fileNameDisplay.textContent = fileName;
+    });
         $("#messageArea").on("submit", function (event) {
             const date = new Date();
             const hour = date.getHours();
@@ -84,7 +98,6 @@
     });
 
     function scrollToBottom() {
-        // Scroll to the bottom of the message container
         var $messageContainer = $("#messageFormeight");
         $messageContainer.scrollTop($messageContainer[0].scrollHeight);
     }
@@ -96,6 +109,27 @@
     function hideLoading() {
         $("#loading").hide()
     }
+
+    $("#upload-form").on("submit", function (event) {
+                event.preventDefault();
+                let formData = new FormData();
+                formData.append('file', document.getElementById('file').files[0]);
+
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json())
+                  .then(data => {
+                      console.log(data);
+
+                      if (data.message) {
+                          alert(data.message);
+                      }
+                  })
+                  .catch(error => {
+                      console.error(error);
+                  });
+            });
 </script>
 
 </body>

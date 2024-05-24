@@ -27,6 +27,8 @@ langchain-community==0.0.38
 langchain-openai
 langsmith
 unstructured
-unstructured-inference
 dependency-injector~=4.41.0
+pillow-heif~=0.16.0
+pikepdf
+
 

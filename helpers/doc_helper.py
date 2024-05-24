@@ -1,6 +1,6 @@
 import os
 
-from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader, UnstructuredPDFLoader, OnlinePDFLoader
+from langchain_community.document_loaders import PyPDFLoader, UnstructuredPDFLoader, OnlinePDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
