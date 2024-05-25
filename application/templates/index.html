@@ -62,21 +62,33 @@
         <label for="model">Model:</label>
         <select id="model" class="form-control form-control-sm"></select>
         <label for="temperature">Temperature:</label>
-        <input type="range" id="temperature" class="form-control form-control-sm" min="0" max="2"
-               step="0.1" value="0.7">
+        <input type="range" id="temperature" class="form-control form-control-sm" min="0" max="2" step="0.1"
+               value="0.7">
+        <span id="temperatureValue">0.7</span>
         <label for="max_tokens">Max Tokens:</label>
-        <input type="range" id="max_tokens" class="form-control form-control-sm" min="1" max="4095"
-               step="1" value="1000">
+        <input type="range" id="max_tokens" class="form-control form-control-sm" min="1" max="4095" step="1"
+               value="1000">
+        <span id="maxTokensValue">1000</span>
         <label for="top_p">Top P:</label>
-        <input type="range" id="top_p" class="form-control form-control-sm" min="0" max="1" step="0.1"
-               value="1">
+        <input type="range" id="top_p" class="form-control form-control-sm" min="0" max="1" step="0.1" value="1">
+        <span id="topPValue">1</span>
     </div>
 </div>
 
 <script>
     $(document).ready(function () {
+        const model = $("#model").val();
+        const temperature = $("#temperature").val();
+        const maxTokens = $("#max_tokens").val();
+        const topP = $("#top_p").val();
         const fileInput = document.getElementById('file');
         const fileNameDisplay = document.getElementById('file-name');
+        const modelSettings = {
+            model: model,
+            temperature: temperature,
+            max_tokens: maxTokens,
+            top_p: topP
+        };
 
         fileInput.addEventListener('change', function () {
             const fileName = this.files.length ? this.files[0].name : 'No file chosen';
@@ -98,6 +110,7 @@
             $.ajax({
                 data: {
                     msg: rawText,
+                    modelSettings: JSON.stringify(modelSettings),
                 },
                 type: "POST",
                 url: "/chat",
@@ -112,18 +125,57 @@
         });
     });
 
-    fetch('/models')
-        .then(response => response.json())
-        .then(data => {
-            const modelSelect = document.getElementById('model');
-            data.forEach(modelId => {
-                const option = document.createElement('option');
-                option.value = modelId;
-                option.text = modelId;
-                modelSelect.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Error fetching model IDs:', error));
+    function populateModelDropdown() {
+        fetch('/models')
+            .then(response => response.json())
+            .then(data => {
+                const modelSelect = document.getElementById('model');
+                let defaultModelExists = false;
+
+                data.forEach(modelId => {
+                    const option = document.createElement('option');
+                    option.value = modelId;
+                    option.text = modelId;
+                    if (modelId === 'gpt-3.5-turbo') {
+                        option.selected = true;
+                        defaultModelExists = true;
+                    }
+                    modelSelect.appendChild(option);
+                });
+
+                if (!defaultModelExists) {
+                    modelSelect.insertAdjacentHTML('afterbegin', '<option value="gpt-3-turbo" selected>gpt-3-turbo</option>');
+                }
+            })
+            .catch(error => console.error('Error fetching model IDs:', error));
+    }
+
+    function setupSliders() {
+        const temperatureSlider = document.getElementById('temperature');
+        const maxTokensSlider = document.getElementById('max_tokens');
+        const topPSlider = document.getElementById('top_p');
+
+        const temperatureValue = document.getElementById('temperatureValue');
+        const maxTokensValue = document.getElementById('maxTokensValue');
+        const topPValue = document.getElementById('topPValue');
+
+        temperatureSlider.addEventListener('input', function () {
+            temperatureValue.innerText = this.value;
+        });
+
+        maxTokensSlider.addEventListener('input', function () {
+            maxTokensValue.innerText = this.value;
+        });
+
+        topPSlider.addEventListener('input', function () {
+            topPValue.innerText = this.value;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setupSliders();
+        populateModelDropdown();
+    });
 
     function scrollToBottom() {
         var $messageContainer = $("#messageFormeight");

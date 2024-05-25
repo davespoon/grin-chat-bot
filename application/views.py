@@ -1,22 +1,27 @@
+import json
 import os
 
-from dependency_injector.wiring import Provide, inject
+from dependency_injector.wiring import Provide, inject, Provider
 from flask import render_template, request, jsonify
 from langchain_core.language_models import BaseChatModel
 from openai import OpenAI
 import constants
 from containers import Container
 from application.response_handler import response
+from dto.ModelSettings import ModelSettings
 
 
 def index():
     return render_template('index.html')
 
 
-@inject
-def chat(chat_openai: BaseChatModel = Provide[Container.chat_openai]):
+# @inject
+def chat():
     human_input = request.form["msg"]
-    answer = response(human_input=human_input, chat_openai=chat_openai)
+    model_settings_json = request.form.get("modelSettings")
+    model_settings = ModelSettings(**json.loads(model_settings_json))
+
+    answer = response(human_input=human_input, model_settings=model_settings)
     return answer
 
 

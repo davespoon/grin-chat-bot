@@ -8,8 +8,10 @@ OPEN_AI_MODELS = "https://api.openai.com/v1/models"
 CHAT_HISTORY_SIZE = 20
 
 # Llm parameters
-MODEL = "gpt-3.5-turbo"
-TEMPERATURE = 0.5
+DEFAULT_MODEL = "gpt-3.5-turbo"
+DEFAULT_TEMP = 0.7
+DEFAULT_MAX_TOKENS = 1000
+DEFAULT_TOP_P = 1
 
 # Retriever parameters
 SEARCH_TYPE = "similarity"

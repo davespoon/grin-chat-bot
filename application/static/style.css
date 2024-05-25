@@ -263,6 +263,27 @@ body, html {
     padding: 10px; /* Add some padding for better appearance */
 }
 
+.settings {
+    display: grid;
+    /*grid-template-columns: 150px auto 50px;*/
+    gap: 10px;
+    align-items: center;
+}
+
+.settings label {
+    grid-column: 1;
+}
+
+.settings select,
+.settings input[type="range"] {
+    grid-column: 3;
+}
+
+.settings span {
+    grid-column: 3;
+    text-align: right;
+}
+
 @media (max-width: 576px) {
     .contacts_card {
         margin-bottom: 15px !important;

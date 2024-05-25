@@ -21,9 +21,10 @@ class Container(containers.DeclarativeContainer):
 
     chat_openai = providers.Singleton(
         ChatOpenAI,
-        model=constants.MODEL,
-        temperature=constants.TEMPERATURE,
-
+        model=constants.DEFAULT_MODEL,
+        temperature=constants.DEFAULT_TEMP,
+        max_tokens=constants.DEFAULT_MAX_TOKENS,
+        top_p=constants.DEFAULT_TOP_P,
         openai_api_key=config.api_key
     )
 
