@@ -1,7 +1,7 @@
 # Global parameters
-DATA_PATH = "../data"
+DATA_PATH = "data"
 WEB_PDF_URI = "https://retrocdn.net/images/9/9c/UltimateHistoryofVideoGames_Book_US.pdf"
-CHROMA_PATH = "../chroma"
+CHROMA_PATH = "chroma"
 
 # Chat parameters
 CHAT_HISTORY_SIZE = 20
