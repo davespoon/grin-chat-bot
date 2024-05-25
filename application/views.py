@@ -3,7 +3,7 @@ import os
 from dependency_injector.wiring import Provide, inject
 from flask import render_template, request, jsonify
 from langchain_core.language_models import BaseChatModel
-
+from openai import OpenAI
 import constants
 from containers import Container
 from application.response_handler import response
@@ -35,3 +35,10 @@ def upload_file():
         return jsonify({'message': 'File uploaded successfully', 'filename': filename}), 200
 
     return jsonify({'error': 'File upload failed'}), 500
+
+
+@inject
+def get_models(client: OpenAI = Provide[Container.openai_client]):
+    models = client.models.list()
+    model_ids = [model.id for model in models]
+    return jsonify(model_ids)

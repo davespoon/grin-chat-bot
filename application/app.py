@@ -16,6 +16,7 @@ def flask_app() -> Flask:
     app.add_url_rule("/", "index", views.index, methods=['GET'])
     app.add_url_rule("/chat", "chat", views.chat, methods=['GET', 'POST'])
     app.add_url_rule("/upload", "upload", views.upload_file, methods=['POST'])
+    app.add_url_rule("/models", "models", views.get_models, methods=['GET'])
     return app
 
 
