@@ -7,11 +7,16 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 def load_documents(directory):
     loaders = [UnstructuredPDFLoader(os.path.join(directory, fn)) for fn in os.listdir(directory)]
     all_documents = []
+    modification_times = []
 
     for loader in loaders:
         raw_documents = loader.load()
+        file_path = loader.file_path
+        modification_time = os.path.getmtime(file_path)
         all_documents.extend(raw_documents)
-        return all_documents
+        modification_times.append(modification_time)
+
+    return all_documents, modification_times
 
 
 def load_online_pdf(uri):
