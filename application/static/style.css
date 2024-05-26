@@ -254,19 +254,19 @@ body, html {
 }
 
 .settings {
-    width: 250px;
-    height: 400px;
+    width: 275px;
+    height: 275px;
     position: fixed;
     top: 0;
     right: 0;
     /*background-color: lightgray; !* Just for visibility, you can change the color as needed *!*/
-    padding: 10px; /* Add some padding for better appearance */
+    padding: 5px; /* Add some padding for better appearance */
 }
 
 .settings {
     display: grid;
     /*grid-template-columns: 150px auto 50px;*/
-    gap: 10px;
+    gap: 5px;
     align-items: center;
 }
 

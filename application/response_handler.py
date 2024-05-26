@@ -16,9 +16,11 @@ chat_history = []
 
 
 @inject
-def response(human_input,
-             chroma_db: VectorStore = Provide[Container.chroma_db],
-             chat_openai: BaseChatModel = Provide[Container.chat_openai]):
+def response(
+        human_input,
+        chroma_db: VectorStore = Provide[Container.chroma_db],
+        chat_openai: BaseChatModel = Provide[Container.chat_openai]
+):
     langchain_client = Client
     vectorstore = chroma_db
     retriever = vectorstore.as_retriever(search_type=constants.SEARCH_TYPE,
@@ -49,7 +51,7 @@ def response(human_input,
     rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
     response_msg = rag_chain.invoke({"input": human_input, "chat_history": chat_history})
 
-    chat_history.append(HumanMessage(content=human_input))
+    # chat_history.append(HumanMessage(content=human_input))
     chat_history.extend([HumanMessage(content=human_input), response_msg["answer"]])
     if len(chat_history) > constants.CHAT_HISTORY_SIZE:
         chat_history.pop(0)
