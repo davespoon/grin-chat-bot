@@ -21,10 +21,10 @@ class Container(containers.DeclarativeContainer):
 
     chat_openai = providers.Singleton(
         ChatOpenAI,
-        model=constants.DEFAULT_MODEL,
-        temperature=constants.DEFAULT_TEMP,
-        max_tokens=constants.DEFAULT_MAX_TOKENS,
-        top_p=constants.DEFAULT_TOP_P,
+        model=config.chat_openai.model,
+        temperature=config.chat_openai.temperature,
+        max_tokens=config.chat_openai.max_tokens,
+        top_p=config.chat_openai.top_p,
         openai_api_key=config.api_key
     )
 
@@ -36,5 +36,5 @@ class Container(containers.DeclarativeContainer):
     chroma_db = providers.Factory(
         get_chroma_db,
         embedding_model=openai_embeddings,
-        persist_directory=config.persist_directory
+        persist_directory=config.chroma.persist_directory
     )

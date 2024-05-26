@@ -2,6 +2,7 @@ from dependency_injector.wiring import inject, Provide
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.history_aware_retriever import create_history_aware_retriever
 from langchain.chains.retrieval import create_retrieval_chain
+from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import HumanMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.vectorstores import VectorStore
@@ -15,7 +16,9 @@ chat_history = []
 
 
 @inject
-def response(human_input, chat_openai, chroma_db: VectorStore = Provide[Container.chroma_db]):
+def response(human_input,
+             chroma_db: VectorStore = Provide[Container.chroma_db],
+             chat_openai: BaseChatModel = Provide[Container.chat_openai]):
     langchain_client = Client
     vectorstore = chroma_db
     retriever = vectorstore.as_retriever(search_type=constants.SEARCH_TYPE,

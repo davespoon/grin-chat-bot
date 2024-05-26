@@ -75,20 +75,25 @@
     </div>
 </div>
 
+
 <script>
+    let modelSettings = {
+        model: "",
+        temperature: "",
+        max_tokens: "",
+        top_p: ""
+    };
+
+    let $model = $("#model");
+    let $temperature = $("#temperature");
+    let $maxTokens = $("#max_tokens");
+    let $topP = $("#top_p");
+
     $(document).ready(function () {
-        const model = $("#model").val();
-        const temperature = $("#temperature").val();
-        const maxTokens = $("#max_tokens").val();
-        const topP = $("#top_p").val();
-        const fileInput = document.getElementById('file');
-        const fileNameDisplay = document.getElementById('file-name');
-        const modelSettings = {
-            model: model,
-            temperature: temperature,
-            max_tokens: maxTokens,
-            top_p: topP
-        };
+
+        let fileInput = document.getElementById('file');
+        let fileNameDisplay = document.getElementById('file-name');
+
 
         fileInput.addEventListener('change', function () {
             const fileName = this.files.length ? this.files[0].name : 'No file chosen';
@@ -123,7 +128,20 @@
             event.preventDefault();
             scrollToBottom();
         });
+
+
+        $model.on("change", updateModelSettings);
+        $temperature.on("input", updateModelSettings);
+        $maxTokens.on("input", updateModelSettings);
+        $topP.on("input", updateModelSettings);
     });
+
+    function updateModelSettings() {
+        modelSettings.model = $model.val();
+        modelSettings.temperature = $temperature.val();
+        modelSettings.max_tokens = $maxTokens.val();
+        modelSettings.top_p = $topP.val();
+    }
 
     function populateModelDropdown() {
         fetch('/models')
@@ -140,12 +158,14 @@
                         option.selected = true;
                         defaultModelExists = true;
                     }
+
                     modelSelect.appendChild(option);
                 });
 
                 if (!defaultModelExists) {
                     modelSelect.insertAdjacentHTML('afterbegin', '<option value="gpt-3-turbo" selected>gpt-3-turbo</option>');
                 }
+                updateModelSettings()
             })
             .catch(error => console.error('Error fetching model IDs:', error));
     }
@@ -175,6 +195,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         setupSliders();
         populateModelDropdown();
+
     });
 
     function scrollToBottom() {

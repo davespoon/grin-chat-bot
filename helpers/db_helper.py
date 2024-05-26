@@ -3,7 +3,6 @@ import time
 from datetime import datetime
 
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
 
 import constants
 from helpers import doc_helper
