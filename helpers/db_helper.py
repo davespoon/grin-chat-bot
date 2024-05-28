@@ -12,6 +12,10 @@ def create_chroma_db(chunks, embedding_model, persist_directory):
     return Chroma.from_documents(chunks, embedding_model, persist_directory=persist_directory)
 
 
+def get_retriever(vectorsotore, search_type, search_kwargs):
+    return vectorsotore.as_retriever(search_type, search_kwargs)
+
+
 def get_chroma_db(embedding_model, persist_directory):
     last_update_time = get_last_update_time(persist_directory)
     docs, modification_times = doc_helper.load_documents(constants.DATA_PATH)

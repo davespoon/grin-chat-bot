@@ -3,7 +3,7 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from openai import OpenAI
 
 import constants
-from helpers.db_helper import get_chroma_db
+from helpers.db_helper import get_chroma_db, get_retriever
 
 
 class Container(containers.DeclarativeContainer):
@@ -37,4 +37,11 @@ class Container(containers.DeclarativeContainer):
         get_chroma_db,
         embedding_model=openai_embeddings,
         persist_directory=config.chroma.persist_directory
+    )
+
+    retriever = providers.Factory(
+        get_retriever,
+        vectorstore=chroma_db,
+        search_type=config.retriever.search_method,
+        search_kwargs=config.retriever.search_kwargs
     )

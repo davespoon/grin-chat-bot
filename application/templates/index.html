@@ -58,7 +58,7 @@
             </div>
         </div>
     </div>
-    <div class="settings">
+    <div class="llmSettings settings">
         <label for="model">Model:</label>
         <select id="model" class="form-control form-control-sm"></select>
         <label for="temperature">Temperature:</label>
@@ -73,6 +73,18 @@
         <input type="range" id="top_p" class="form-control form-control-sm" min="0" max="1" step="0.1" value="1">
         <span id="topPValue">1</span>
     </div>
+
+    <div class="retrieverSettings">
+        <label for="search_type">Search Type:</label>
+        <select id="search_type" class="form-control form-control-sm">
+            <option value="type1">Similarity</option>
+            <option value="type2">MMR</option>
+            <option value="type3">Type 3</option>
+        </select>
+        <label for="search_kwargs">Search Kwargs:</label>
+        <button type="button" onclick="addSearchKwargInput()">Add Kwarg</button>
+        <div id="search_kwargs_container"></div>
+    </div>
 </div>
 
 
@@ -84,10 +96,13 @@
         top_p: ""
     };
 
+    let searchKwargs = {}
+
     let $model = $("#model");
     let $temperature = $("#temperature");
     let $maxTokens = $("#max_tokens");
     let $topP = $("#top_p");
+
 
     $(document).ready(function () {
 
@@ -116,6 +131,7 @@
                 data: {
                     msg: rawText,
                     modelSettings: JSON.stringify(modelSettings),
+                    searchKwargs: JSON.stringify(getSearchKwargs())
                 },
                 type: "POST",
                 url: "/chat",
@@ -130,10 +146,7 @@
         });
 
 
-        $model.on("change", updateModelSettings);
-        $temperature.on("input", updateModelSettings);
-        $maxTokens.on("input", updateModelSettings);
-        $topP.on("input", updateModelSettings);
+        updateOnChange();
     });
 
     function updateModelSettings() {
@@ -141,6 +154,57 @@
         modelSettings.temperature = $temperature.val();
         modelSettings.max_tokens = $maxTokens.val();
         modelSettings.top_p = $topP.val();
+    }
+
+    function updateOnChange() {
+        $model.on("change", updateModelSettings);
+        $temperature.on("input", updateModelSettings);
+        $maxTokens.on("input", updateModelSettings);
+        $topP.on("input", updateModelSettings);
+        $("#search_type").on("change", updateSearchType);
+    }
+
+    function updateSearchType() {
+        searchKwargs.search_type = $("#search_type").val();
+    }
+
+    function addSearchKwargInput() {
+        const container = document.getElementById('search_kwargs_container');
+        const inputGroup = document.createElement('div');
+        inputGroup.classList.add('input-group', 'mb-2');
+
+        const inputKey = document.createElement('input');
+        inputKey.type = 'text';
+        inputKey.classList.add('form-control');
+        inputKey.placeholder = 'Key';
+        inputKey.style.width = '100px';
+
+        const inputValue = document.createElement('input');
+        inputValue.type = 'text';
+        inputValue.classList.add('form-control');
+        inputValue.placeholder = 'Value';
+        inputValue.style.width = '100px';
+
+        inputGroup.appendChild(inputKey);
+        inputGroup.appendChild(inputValue);
+        container.appendChild(inputGroup);
+    }
+
+    function getSearchKwargs() {
+        const container = document.getElementById('search_kwargs_container');
+        const inputGroups = container.getElementsByClassName('input-group');
+        const searchKwargs = {};
+
+        for (let inputGroup of inputGroups) {
+            const inputs = inputGroup.getElementsByTagName('input');
+            const key = inputs[0].value;
+            const value = inputs[1].value;
+            if (key && value) {
+                searchKwargs[key] = value;
+            }
+        }
+
+        return searchKwargs;
     }
 
     function populateModelDropdown() {

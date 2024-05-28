@@ -253,15 +253,48 @@ body, html {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-.settings {
+.llmSettings {
     width: 275px;
     height: 275px;
     position: fixed;
     top: 0;
     right: 0;
-    /*background-color: lightgray; !* Just for visibility, you can change the color as needed *!*/
-    padding: 5px; /* Add some padding for better appearance */
+    padding: 5px;
 }
+
+.retrieverSettings {
+    width: 275px;
+    height: 150px;
+    position: fixed;
+    top: 280px;
+    right: 0;
+    padding: 5px;
+    margin-top: 10px;
+    display: grid;
+
+}
+
+.retrieverSettings button {
+    /*padding: 5px;*/
+    border-radius: 5px;
+    margin-top: 5px;
+    grid-column: 1;
+}
+
+.retrieverSettings label {
+    /*padding: 5px;*/
+    border-radius: 5px;
+    margin-top: 5px;
+    grid-column: 1;
+}
+
+.retrieverSettings form {
+    /*padding: 5px;*/
+    border-radius: 5px;
+    margin-top: 5px;
+    grid-column: 2;
+}
+
 
 .settings {
     display: grid;
@@ -273,6 +306,7 @@ body, html {
 .settings label {
     grid-column: 1;
 }
+
 
 .settings select,
 .settings input[type="range"] {

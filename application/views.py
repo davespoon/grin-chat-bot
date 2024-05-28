@@ -2,7 +2,7 @@ import json
 
 from dependency_injector.wiring import Provide, inject
 from flask import render_template, request, jsonify
-from helpers import doc_helper, llm_helper
+from helpers import doc_helper, config_helper
 from openai import OpenAI
 from containers import Container
 from application.response_handler import response
@@ -19,7 +19,11 @@ def chat(container: Container = Provide[Container]):
 
     model_settings_json = request.form.get("modelSettings")
     model_settings = ModelSettings(**json.loads(model_settings_json))
-    llm_helper.populate_model_settings(container, model_settings)
+    config_helper.model_settings(container, model_settings)
+
+    search_kwargs_json = request.form.get("searchKwargs")
+    search_kwargs = json.loads(search_kwargs_json)
+    config_helper.retriever_search(container, search_kwargs)
 
     answer = response(human_input=human_input)
     return answer
