@@ -1,38 +1,67 @@
-A Brief History of Video Games - Yamaha Music - Blog
-Jake Uitti
+A brief history of video games
+Robert Dyer
 
-To tell the origin story of video games, we must look at the early days of computers. In the 1950s, engineers began to use rudimentary machines to design simple games to play. A big breakthrough came in 1962 when MIT student Steve Russell, along with friends, created Spacewar! This title featured controllable spaceships that had to avoid a star’s “gravity” while also engaging in battle against one another.
+It’s hard to believe that video games have been around for as long as they have. The first commercial arcade game, Computer Space, was released all the way back in 1971. Since then, the video game industry has exploded into a multi-billion dollar behemoth. With such a long and storied history, there are bound to be some interesting stories and facts about video games that you may not know. In this article, we will explore the history of video games and some of the most interesting facts about them. From the first computer game ever created to the highest-grossing game of all time, read on to learn more about the history of video games.
+The early days of video games
 
-Though having no real commercial success (its popularity was limited to the relatively small programming community of the era), Spacewar! was so impactful that it is now in the Library of Congress. In the following decade, more innovation took place, with a preponderance of hugely popular games (and their theme songs) like Pong, Space-Invaders and Pac-Man. But it wouldn’t stop there. In this article, we’ll examine the origins of the video game industry and track its massive development. Today, it is a billion-dollar tech enterprise, providing unique experiences made even more immersive when enjoyed with gaming headsets like the Yamaha YH-G01.
+Video games have been around for a long time, with the first commercial game being released in 1971. However, it was not until the late 1970s and early 1980s that video games began to gain popularity. The early days of video games were marked by a few key features: simple graphics, basic gameplay, and limited interactivity.
 
-THE GOLDEN 1970s
+One of the earliest and most popular video games was Pong, which was released in 1972. Pong was a simple tennis game where players used paddles to hit a ball back and forth. While Pong was not the first video game, it was one of the most influential games of its time. Pong helped to popularize video gaming and laid the foundation for many of the genres that we enjoy today.
 
-In 1972, North America was introduced to Pong. While today the title may seem overly simple, at the time it was mesmerizing. The game was essentially a digital version of table tennis, with a line down the middle and two digital “paddles” on either side of the screen that the player could move up and down. (Move it fast enough and you could even put a digital spin on the pixelated ball!) Like real ping-pong, the objective was to hit the ball back and forth until you could make your opponent (which could be another person or the computer) miss.
+Another early classic video game is Space Invaders, which was released in 1978. Space Invaders was an arcade game where players had to defend their base from waves of aliens. Space Invaders was one of the first games to use scrolling graphics, and it also introduced the concept of shooting at enemies on screen.
 
-Six years later, the alien-fighting Space Invaders was released, followed in 1980 by Pac-Man. While these games were engaging and innovative, what made them supremely popular was the invention of the video arcade. The concept of the mechanized “penny arcade” had begun in the early 20th century. But the digital video game-based arcade began to pop up in the 1970s and was a magnet for young people.
+Video gaming in the early days was limited by technology. Early consoles could only display basic graphics, so most games were based on simple concepts with little room for innovation. As technology improved, however, video games began to become more complex and interactive. The early days of video gaming laid the groundwork for the booming industry we see today.
+The first computer game ever created
 
-Patrons would pump quarters into their favorite video games, which were housed in tall cabinets. As such, gaming was largely a public endeavor — kids would gather around and watch a friend try and beat a high score. At around the same time, the home gaming console was gaining ground in the market. By the mid-70s, Atari® was offering gamers the chance to play their favorite titles — like Pong — in the comfort of their living room.
+The first computer game ever created was called "Tennis for Two". It was created by William Higinbotham in 1958. The game was designed to be played on an oscilloscope, which was a new technology at the time. "Tennis for Two" was very simple, but it was a lot of fun to play.
 
-But that was just the beginning.
+The rise of console gaming
 
-THE UP-AND-DOWN 1980s
+The console gaming industry began in the early 1970s with the release of the first commercially available video game console, the Magnavox Odyssey. The Odyssey was not a particularly successful console, but it paved the way for later consoles like the Atari 2600 and Intellivision.
 
-When the 1980s hit, video games were peaking in popularity. In fact, there was so much money and interest in video games that the market famously oversaturated and crashed in 1983. Some even pinpoint the fall to one specific title — one that’s considered by many to be the worst video game of all time: E.T. the Extra-Terrestrial. Its creation was rushed, pushed to release by Christmas the year of the famous Steven Spielberg film of the same name. There is even an urban legend that thousands of its unsold cartridges remain buried somewhere in New Mexico!
+The Atari 2600 was released in 1977 and quickly became the most popular video game console on the market. It featured a number of classic games like "Space Invaders" and "Pac-Man." The success of the Atari 2600 led to a boom in the console gaming industry in the early 1980s.
 
-But with the (temporary) downfall of arcades and video games came the potential for a rebound. Enter Nintendo® with its Nintendo Entertainment System (NES) and its now-signature game, Super Mario Bros™, both of which were released in 1985. Gamers of today owe a great deal to the sibling Italian plumbers — Mario and Luigi — and their dedication to saving Princess Peach. NES games like Paperboy (1985), The Legend of Zelda™ (1986) and others sold like hotcakes.
+A number of other companies released consoles during this time period, including Mattel, Coleco, and Nintendo. Nintendo's first console, the Nintendo Entertainment System (NES), was released in 1985 and quickly become one of the most popular consoles ever made. It featured classic games like "Super Mario Bros." and "Legend of Zelda."
 
-COMPUTERS, CONSOLES AND THE 1990s
 
-Nintendo released the first major handheld gaming system, Game Boy™, in 1990. Thanks to its success, the business of gaming grew immensely. Arcades were still relatively popular, but the focus was now more on home consoles and the burgeoning computer game market. With the advent of smaller yet ever more powerful “personal computers,” gamers at home were privy to titles with more advanced graphics like Wolfenstein 3D, a first-person point-of-view “shooter” game released in 1992 on CD-ROM.
+The NES helped to revitalize the flagging video game industry after the video game crash of 1983. The crash had been caused by a number of factors, including oversaturation of the market with poor quality games. The NES helped to bring back consumer confidence in video games with its high-quality games and strong third-party support.
 
-Around this time, too, video game consoles rose in popularity. After NES, consoles like Sega Genesis and Super Nintendo found their ways into millions of homes, followed by the Nintendo 64 system, which featured the first-person shooter, GoldenEye 007 (1997). New video games with characters like Sonic the Hedgehog (1991) became household names. In addition, sports titles like Madden NFL ’94 (1993) and NBA Jam (1993) became prevalent. Not to be outdone, one-on-one fighting games like the bloody Mortal Kombat (1992) and Street Fighter II (1991) were fan favorites, played in arcades and at home.
+The NES was followed by a number of other successful consoles from Nintendo, including the Super Nintendo Entertainment System (SNES) and the Nintendo 64 (N64). Other companies also had success during this time period with their own consoles, including Sega with the Sega Genesis/Mega Drive and Sony with the PlayStation.
 
-BIGGER, BETTER 2000s
+The console gaming industry continued to grow throughout the late 1990s and early 2000s. Microsoft entered the market in 2001 with its Xbox console, and Nintendo released its GameCube console in 2002. In 2006, Nintendo released its Wii console, which featured innovative motion controls that helped to make video games more accessible to a wider audience.
 
-With the new millennium came new possibilities. In fact, the best-selling home console to date is Sony’s PlayStation 2®, which first hit the market in 2000. That console improved on the first PlayStation®, which debuted in the mid-90s and featured titles like the 3D flying game Star Fox (1993). In 2001, Microsoft made a power move and entered the fray with the Xbox™ console and its futuristic game, Halo: Combat Evolved (the first in the longstanding Halo franchise). From that point forward, the decade was dominated by bigger, better graphics each year and more in-depth titles featuring nuanced missions and heart-racing action.
+The console gaming industry has continued to grow in recent years with the release of new consoles from all of the major manufacturers. The current generation of consoles includes the PlayStation 5 from Sony, the Xbox Series X|S from Microsoft, and the Switch from Nintendo.
+The highest-grossing game of all time
 
-THE GAMES OF TODAY
+In 1975, a little game called Pong was released. It was an instant hit, and people all over the world were hooked on this new form of entertainment. Pong quickly became the highest-grossing game of all time, and its success paved the way for the video game industry as we know it today.
 
-Today, gamers enjoy more options as ever before. There are handheld systems much more advanced than Game Boy, such as the Nintendo Switch™, which came out in 2017. There are also myriad titles of varying skill level available to gamers via their tablets and smartphones. Offerings like Angry Birds (2009) and Candy Crush Saga (2012) have generated millions of dollars and occupied almost as many hours of players’ free time.
+Since then, there have been many other games that have taken the title of highest-grossing game of all time. Some of these include Pac-Man, Tetris, Super Mario Bros., and Wii Sports. Each of these games has brought something unique to the table, and they have all been immensely popular with gamers worldwide.
 
-Those who want more bang for their buck can dive into the über-realism of Second Life or the endlessly fascinating Minecraft™series on their computers. Also available is the latest innovation from Sony: the company’s PS5 (PlayStation 5®). Even virtual reality gaming is growing, with titles like Beat Saber. Today, there are modern “open world” games that offer expansive, multi-faceted stages to navigate, and multiplayer games that give the chance for players to work in teams or compete against each another. Advanced titles like Red Dead Redemption II may even leave some speechless with their hyper-realistic details and advanced plots. No doubt about it: We’ve come a long way since Pong!
+As of writing, Minecraft takes the top spot of highest-selling game of all time with sales of 238,000,000 copies.
+
+As the video game industry continues to grow, it is likely that we will see even more games that break records and become the highest-grossing games of all time. Who knows what the future holds for video games? We can’t wait to find out!
+The birth of mobile gaming
+
+The industry of mobile gaming has been around for quite some time. The first real mobile game console was the Atari Lynx, released in 1989. However, it was not until the release of the Nintendo Game Boy in 1992 that mobile gaming really took off. Since then, there have been numerous handheld consoles released, each with its own library of games.
+
+The birth of smartphone gaming can be traced back to 2007, with the release of Apple's iPhone. While there were a few games available for the iPhone at launch, it wasn't until the App Store launched in 2008 that mobile gaming really started to take off. There are now thousands of games available for iOS devices, and Android devices are not far behind.
+
+With the release of powerful and affordable smartphones and tablets, mobile gaming has become more popular than ever before. It is estimated that there are now more than two billion active gamers around the world, and a large portion of them are playing on mobile devices.
+The future of video games
+
+The future of video games is looking very bright. The industry is continuing to grow at a rapid pace and there are many new and exciting developments on the horizon.
+
+Virtual reality is one of the most promising areas for future growth. VR technology has come a long way in recent years and it is now starting to become more widely available. There are already some great VR games on the market, and it is only going to get better in the coming years.
+
+Augmented reality is another area that shows a lot of promise for the future of gaming. This technology allows you to overlay digital information onto the real world, and it has a lot of potential applications in gaming. Pokémon Go was one of the first popular examples of this technology, and there are sure to be many more in the future.
+
+The rise of mobile gaming is another trend that shows no signs of slowing down. More and more people are playing games on their smartphones and tablets, and there are some great titles available. It is also becoming increasingly easy to develop games for these platforms, so we can expect to see even more great mobile games in the future.
+
+In conclusion, the future of video games looks very bright indeed. There are many exciting new developments on the horizon that will continue to grow the industry and provide gamers with even more amazing experiences.
+
+Conclusion
+
+It's amazing to think about how far video games have come in such a short amount of time. What started as simple, pixelated games which has now evolved into immersive, realistic experiences that can transport us to other worlds. As technology continues to evolve, who knows what the future of video games will hold? We can't wait to find out.
+
+If this article made your day, imagine what a coffee could do for us!
+Support That's Pop Culture with a caffeine boost... because great reads deserve great brews!

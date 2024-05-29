@@ -13,17 +13,19 @@ def index():
     return render_template('index.html')
 
 
-@inject
+# @inject
 def chat(container: Container = Provide[Container]):
     human_input = request.form["msg"]
 
-    model_settings_json = request.form.get("modelSettings")
-    model_settings = ModelSettings(**json.loads(model_settings_json))
-    config_helper.model_settings(container, model_settings)
+    model_settings = ModelSettings(**json.loads(request.form.get("modelSettings")))
+    config_helper.set_model_settings(container, model_settings)
 
+    search_method_json = request.form.get("search_method")
     search_kwargs_json = request.form.get("searchKwargs")
+
+    search_method = json.loads(search_method_json)
     search_kwargs = json.loads(search_kwargs_json)
-    config_helper.retriever_search(container, search_kwargs)
+    config_helper.set_retriever_search(container, search_method, search_kwargs)
 
     answer = response(human_input=human_input)
     return answer

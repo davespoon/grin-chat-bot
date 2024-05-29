@@ -75,15 +75,15 @@
     </div>
 
     <div class="retrieverSettings">
-        <label for="search_type">Search Type:</label>
-        <select id="search_type" class="form-control form-control-sm">
-            <option value="type1">Similarity</option>
-            <option value="type2">MMR</option>
-            <option value="type3">Type 3</option>
+        <label for="search_method">Search Type:</label>
+        <select id="search_method" name="search_method" class="form-control form-control-sm">
+            <option value="similarity" selected>Similarity</option>
+            <option value="mmr">MMR</option>
+            <option value="similarity_score_threshold">Similarity Score Threshold</option>
         </select>
         <label for="search_kwargs">Search Kwargs:</label>
         <button type="button" onclick="addSearchKwargInput()">Add Kwarg</button>
-        <div id="search_kwargs_container"></div>
+        <div id="search_kwargs"></div>
     </div>
 </div>
 
@@ -95,13 +95,13 @@
         max_tokens: "",
         top_p: ""
     };
-
-    let searchKwargs = {}
+    let searchMethod="similarity";
 
     let $model = $("#model");
     let $temperature = $("#temperature");
     let $maxTokens = $("#max_tokens");
     let $topP = $("#top_p");
+    let $searchMethod = $("#search_method");
 
 
     $(document).ready(function () {
@@ -131,6 +131,7 @@
                 data: {
                     msg: rawText,
                     modelSettings: JSON.stringify(modelSettings),
+                    search_method: JSON.stringify(searchMethod),
                     searchKwargs: JSON.stringify(getSearchKwargs())
                 },
                 type: "POST",
@@ -161,15 +162,15 @@
         $temperature.on("input", updateModelSettings);
         $maxTokens.on("input", updateModelSettings);
         $topP.on("input", updateModelSettings);
-        $("#search_type").on("change", updateSearchType);
+        $searchMethod.on("change", updateSearchMethod);
     }
 
-    function updateSearchType() {
-        searchKwargs.search_type = $("#search_type").val();
+    function updateSearchMethod() {
+        searchMethod = $searchMethod.val();
     }
 
     function addSearchKwargInput() {
-        const container = document.getElementById('search_kwargs_container');
+        const container = document.getElementById('search_kwargs');
         const inputGroup = document.createElement('div');
         inputGroup.classList.add('input-group', 'mb-2');
 
@@ -191,7 +192,7 @@
     }
 
     function getSearchKwargs() {
-        const container = document.getElementById('search_kwargs_container');
+        const container = document.getElementById('search_kwargs');
         const inputGroups = container.getElementsByClassName('input-group');
         const searchKwargs = {};
 

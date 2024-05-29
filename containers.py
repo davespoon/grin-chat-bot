@@ -1,4 +1,5 @@
 from dependency_injector import containers, providers
+from langchain_core.vectorstores import VectorStoreRetriever
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from openai import OpenAI
 
@@ -19,7 +20,7 @@ class Container(containers.DeclarativeContainer):
         api_key=config.api_key
     )
 
-    chat_openai = providers.Singleton(
+    chat_openai = providers.Factory(
         ChatOpenAI,
         model=config.chat_openai.model,
         temperature=config.chat_openai.temperature,
@@ -40,7 +41,7 @@ class Container(containers.DeclarativeContainer):
     )
 
     retriever = providers.Factory(
-        get_retriever,
+        VectorStoreRetriever,
         vectorstore=chroma_db,
         search_type=config.retriever.search_method,
         search_kwargs=config.retriever.search_kwargs

@@ -1,7 +1,7 @@
 import constants
 
 
-def model_settings(container, model_settings):
+def set_model_settings(container, model_settings):
     container.config.chat_openai.model.from_value(
         model_settings.model if model_settings.model is not None else constants.DEFAULT_MODEL)
     container.config.chat_openai.temperature.from_value(
@@ -12,5 +12,6 @@ def model_settings(container, model_settings):
         model_settings.top_p if model_settings.top_p is not None else constants.DEFAULT_TOP_P)
 
 
-def retriever_search(container, kwargs):
-    container.config.retriever.search_kwargs = kwargs
+def set_retriever_search(container, search_method, search_kwargs):
+    container.config.retriever.search_method.from_value(search_method)
+    container.config.retriever.search_kwargs.from_value(search_kwargs)
