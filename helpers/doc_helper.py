@@ -1,4 +1,5 @@
 import os
+import constants
 
 from langchain_community.document_loaders import PyPDFLoader, OnlinePDFLoader, TextLoader, CSVLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -47,3 +48,11 @@ def split_text(documents):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
     chunks = text_splitter.split_documents(documents)
     return chunks
+
+
+def save_file(file):
+    if file:
+        filename = file.filename
+        file.save(os.path.join(constants.DATA_PATH, filename))
+        return filename
+    return None

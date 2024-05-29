@@ -1,8 +1,10 @@
 from dependency_injector import containers, providers
+from langchain_core.vectorstores import VectorStoreRetriever
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from openai import OpenAI
 
 import constants
-from helpers.db_helper import get_chroma_db
+from helpers.db_helper import get_chroma_db, get_retriever
 
 
 class Container(containers.DeclarativeContainer):
@@ -13,10 +15,17 @@ class Container(containers.DeclarativeContainer):
         ],
     )
 
-    chat_openai = providers.Singleton(
+    openai_client = providers.Singleton(
+        OpenAI,
+        api_key=config.api_key
+    )
+
+    chat_openai = providers.Factory(
         ChatOpenAI,
-        model=constants.MODEL,
-        temperature=constants.TEMPERATURE,
+        model=config.chat_openai.model,
+        temperature=config.chat_openai.temperature,
+        max_tokens=config.chat_openai.max_tokens,
+        top_p=config.chat_openai.top_p,
         openai_api_key=config.api_key
     )
 
@@ -28,5 +37,12 @@ class Container(containers.DeclarativeContainer):
     chroma_db = providers.Factory(
         get_chroma_db,
         embedding_model=openai_embeddings,
-        persist_directory=config.persist_directory
+        persist_directory=config.chroma.persist_directory
+    )
+
+    retriever = providers.Factory(
+        VectorStoreRetriever,
+        vectorstore=chroma_db,
+        search_type=config.retriever.search_method,
+        search_kwargs=config.retriever.search_kwargs
     )

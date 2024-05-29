@@ -3,7 +3,6 @@ import time
 from datetime import datetime
 
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
 
 import constants
 from helpers import doc_helper
@@ -11,6 +10,10 @@ from helpers import doc_helper
 
 def create_chroma_db(chunks, embedding_model, persist_directory):
     return Chroma.from_documents(chunks, embedding_model, persist_directory=persist_directory)
+
+
+def get_retriever(vectorsotore, search_type, search_kwargs):
+    return vectorsotore.as_retriever(search_type, search_kwargs)
 
 
 def get_chroma_db(embedding_model, persist_directory):

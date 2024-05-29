@@ -58,12 +58,57 @@
             </div>
         </div>
     </div>
+    <div class="llmSettings settings">
+        <label for="model">Model:</label>
+        <select id="model" class="form-control form-control-sm"></select>
+        <label for="temperature">Temperature:</label>
+        <input type="range" id="temperature" class="form-control form-control-sm" min="0" max="2" step="0.1"
+               value="0.7">
+        <span id="temperatureValue">0.7</span>
+        <label for="max_tokens">Max Tokens:</label>
+        <input type="range" id="max_tokens" class="form-control form-control-sm" min="1" max="4095" step="1"
+               value="1000">
+        <span id="maxTokensValue">1000</span>
+        <label for="top_p">Top P:</label>
+        <input type="range" id="top_p" class="form-control form-control-sm" min="0" max="1" step="0.1" value="1">
+        <span id="topPValue">1</span>
+    </div>
+
+    <div class="retrieverSettings">
+        <label for="search_method">Search Type:</label>
+        <select id="search_method" name="search_method" class="form-control form-control-sm">
+            <option value="similarity" selected>Similarity</option>
+            <option value="mmr">MMR</option>
+            <option value="similarity_score_threshold">Similarity Score Threshold</option>
+        </select>
+        <label for="search_kwargs">Search Kwargs:</label>
+        <button type="button" onclick="addSearchKwargInput()">Add Kwarg</button>
+        <div id="search_kwargs"></div>
+    </div>
 </div>
 
+
 <script>
+    let modelSettings = {
+        model: "",
+        temperature: "",
+        max_tokens: "",
+        top_p: ""
+    };
+    let searchMethod="similarity";
+
+    let $model = $("#model");
+    let $temperature = $("#temperature");
+    let $maxTokens = $("#max_tokens");
+    let $topP = $("#top_p");
+    let $searchMethod = $("#search_method");
+
+
     $(document).ready(function () {
-        const fileInput = document.getElementById('file');
-        const fileNameDisplay = document.getElementById('file-name');
+
+        let fileInput = document.getElementById('file');
+        let fileNameDisplay = document.getElementById('file-name');
+
 
         fileInput.addEventListener('change', function () {
             const fileName = this.files.length ? this.files[0].name : 'No file chosen';
@@ -85,6 +130,9 @@
             $.ajax({
                 data: {
                     msg: rawText,
+                    modelSettings: JSON.stringify(modelSettings),
+                    search_method: JSON.stringify(searchMethod),
+                    searchKwargs: JSON.stringify(getSearchKwargs())
                 },
                 type: "POST",
                 url: "/chat",
@@ -97,6 +145,122 @@
             event.preventDefault();
             scrollToBottom();
         });
+
+
+        updateOnChange();
+    });
+
+    function updateModelSettings() {
+        modelSettings.model = $model.val();
+        modelSettings.temperature = $temperature.val();
+        modelSettings.max_tokens = $maxTokens.val();
+        modelSettings.top_p = $topP.val();
+    }
+
+    function updateOnChange() {
+        $model.on("change", updateModelSettings);
+        $temperature.on("input", updateModelSettings);
+        $maxTokens.on("input", updateModelSettings);
+        $topP.on("input", updateModelSettings);
+        $searchMethod.on("change", updateSearchMethod);
+    }
+
+    function updateSearchMethod() {
+        searchMethod = $searchMethod.val();
+    }
+
+    function addSearchKwargInput() {
+        const container = document.getElementById('search_kwargs');
+        const inputGroup = document.createElement('div');
+        inputGroup.classList.add('input-group', 'mb-2');
+
+        const inputKey = document.createElement('input');
+        inputKey.type = 'text';
+        inputKey.classList.add('form-control');
+        inputKey.placeholder = 'Key';
+        inputKey.style.width = '100px';
+
+        const inputValue = document.createElement('input');
+        inputValue.type = 'text';
+        inputValue.classList.add('form-control');
+        inputValue.placeholder = 'Value';
+        inputValue.style.width = '100px';
+
+        inputGroup.appendChild(inputKey);
+        inputGroup.appendChild(inputValue);
+        container.appendChild(inputGroup);
+    }
+
+    function getSearchKwargs() {
+        const container = document.getElementById('search_kwargs');
+        const inputGroups = container.getElementsByClassName('input-group');
+        const searchKwargs = {};
+
+        for (let inputGroup of inputGroups) {
+            const inputs = inputGroup.getElementsByTagName('input');
+            const key = inputs[0].value;
+            const value = inputs[1].value;
+            if (key && value) {
+                searchKwargs[key] = value;
+            }
+        }
+
+        return searchKwargs;
+    }
+
+    function populateModelDropdown() {
+        fetch('/models')
+            .then(response => response.json())
+            .then(data => {
+                const modelSelect = document.getElementById('model');
+                let defaultModelExists = false;
+
+                data.forEach(modelId => {
+                    const option = document.createElement('option');
+                    option.value = modelId;
+                    option.text = modelId;
+                    if (modelId === 'gpt-3.5-turbo') {
+                        option.selected = true;
+                        defaultModelExists = true;
+                    }
+
+                    modelSelect.appendChild(option);
+                });
+
+                if (!defaultModelExists) {
+                    modelSelect.insertAdjacentHTML('afterbegin', '<option value="gpt-3-turbo" selected>gpt-3-turbo</option>');
+                }
+                updateModelSettings()
+            })
+            .catch(error => console.error('Error fetching model IDs:', error));
+    }
+
+    function setupSliders() {
+        const temperatureSlider = document.getElementById('temperature');
+        const maxTokensSlider = document.getElementById('max_tokens');
+        const topPSlider = document.getElementById('top_p');
+
+        const temperatureValue = document.getElementById('temperatureValue');
+        const maxTokensValue = document.getElementById('maxTokensValue');
+        const topPValue = document.getElementById('topPValue');
+
+        temperatureSlider.addEventListener('input', function () {
+            temperatureValue.innerText = this.value;
+        });
+
+        maxTokensSlider.addEventListener('input', function () {
+            maxTokensValue.innerText = this.value;
+        });
+
+        topPSlider.addEventListener('input', function () {
+            topPValue.innerText = this.value;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setupSliders();
+        populateModelDropdown();
+
     });
 
     function scrollToBottom() {
