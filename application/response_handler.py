@@ -17,9 +17,9 @@ chat_history = []
 
 @inject
 def response(
+        model,
         human_input,
         retriever: VectorStoreRetriever = Provide[Container.retriever],
-        model: BaseChatModel = Provide[Container.chat_openai]
 ):
     langchain_client = Client
 

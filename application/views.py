@@ -2,23 +2,28 @@ import json
 
 from dependency_injector.wiring import Provide, inject
 from flask import render_template, request, jsonify
-from helpers import doc_helper, config_helper
+from langchain_openai.chat_models.base import BaseChatOpenAI
 from openai import OpenAI
-from containers import Container
+
 from application.response_handler import response
+from containers import Container
 from dto.ModelSettings import ModelSettings
+from helpers import doc_helper, config_helper
 
 
 def index():
     return render_template('index.html')
 
 
-# @inject
-def chat(container: Container = Provide[Container]):
+@inject
+def chat(
+        container: Container = Provide[Container],
+        model: BaseChatOpenAI = Provide[Container.chat_openai]
+):
     human_input = request.form["msg"]
 
     model_settings = ModelSettings(**json.loads(request.form.get("modelSettings")))
-    config_helper.set_model_settings(container, model_settings)
+    updated_model = config_helper.set_model_settings(model, model_settings)
 
     search_method_json = request.form.get("search_method")
     search_kwargs_json = request.form.get("searchKwargs")
@@ -27,7 +32,7 @@ def chat(container: Container = Provide[Container]):
     search_kwargs = json.loads(search_kwargs_json)
     config_helper.set_retriever_search(container, search_method, search_kwargs)
 
-    answer = response(human_input=human_input)
+    answer = response(model=updated_model, human_input=human_input)
     return answer
 
 
