@@ -1,7 +1,7 @@
-from langchain_openai.chat_models.base import BaseChatOpenAI
+from langchain_core.language_models import BaseChatModel
 
 
-def set_model_settings(model: BaseChatOpenAI, model_settings):
+def set_model_settings(model: BaseChatModel, model_settings):
     model.model_name = model_settings.model
     model.temperature = float(model_settings.temperature)
     model.max_tokens = int(model_settings.max_tokens)
