@@ -2,6 +2,7 @@ import json
 
 from dependency_injector.wiring import Provide, inject
 from flask import render_template, request, jsonify
+from langchain_core.language_models import BaseChatModel
 from langchain_openai.chat_models.base import BaseChatOpenAI
 from openai import OpenAI
 
@@ -18,7 +19,7 @@ def index():
 @inject
 def chat(
         container: Container = Provide[Container],
-        model: BaseChatOpenAI = Provide[Container.chat_openai]
+        model: BaseChatModel = Provide[Container.chat_openai]
 ):
     human_input = request.form["msg"]
 

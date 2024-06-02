@@ -4,7 +4,7 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from openai import OpenAI
 
 import constants
-from helpers.db_helper import get_chroma_db, get_retriever
+from helpers.db_helper import get_chroma_db
 
 
 class Container(containers.DeclarativeContainer):
