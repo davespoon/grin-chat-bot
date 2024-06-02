@@ -3,7 +3,7 @@ import json
 from dependency_injector.wiring import Provide, inject
 from flask import render_template, request, jsonify
 from langchain_core.language_models import BaseChatModel
-from langchain_openai.chat_models.base import BaseChatOpenAI
+from langchain_core.vectorstores import VectorStoreRetriever
 from openai import OpenAI
 
 from application.response_handler import response
@@ -18,7 +18,7 @@ def index():
 
 @inject
 def chat(
-        container: Container = Provide[Container],
+        retriever: VectorStoreRetriever = Provide[Container.retriever],
         model: BaseChatModel = Provide[Container.chat_openai]
 ):
     human_input = request.form["msg"]
@@ -31,9 +31,9 @@ def chat(
 
     search_method = json.loads(search_method_json)
     search_kwargs = json.loads(search_kwargs_json)
-    config_helper.set_retriever_search(container, search_method, search_kwargs)
+    configured_retriever = config_helper.set_retriever_search(retriever, search_method, search_kwargs)
 
-    answer = response(model=updated_model, human_input=human_input)
+    answer = response(model=updated_model, retriever=configured_retriever, human_input=human_input)
     return answer
 
 

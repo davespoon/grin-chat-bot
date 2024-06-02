@@ -43,6 +43,5 @@ class Container(containers.DeclarativeContainer):
     retriever = providers.Factory(
         VectorStoreRetriever,
         vectorstore=chroma_db,
-        search_type=config.retriever.search_method,
-        search_kwargs=config.retriever.search_kwargs
+        search_type="similarity"
     )

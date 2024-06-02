@@ -14,11 +14,11 @@ from prompts import prompt_templates
 chat_history = []
 
 
-@inject
+# @inject
 def response(
         model,
-        human_input,
-        retriever: VectorStoreRetriever = Provide[Container.retriever],
+        retriever,
+        human_input
 ):
     langchain_client = Client
 
