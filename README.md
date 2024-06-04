@@ -1,4 +1,4 @@
-# Chat with your pdf
+# Chat with your documents
 
 This is a simple chat application that interacts with your documents, powered by LangChain and OpenAI. This project serves as a Retrieval-Augmented Generation (RAG) example.
 
