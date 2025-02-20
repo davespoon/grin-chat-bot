@@ -1,4 +1,4 @@
-# Chat with your documents
+# Chat with Your Documents
 
 This is a simple chat application that interacts with your documents, powered by LangChain and OpenAI. This project serves as a Retrieval-Augmented Generation (RAG) example.
 
@@ -8,72 +8,90 @@ To use this application, you will need:
 
 - An OpenAI API account
 - A LangChain account (for LangSmith integration, if desired)
-- Python 3.11.9
+- Python 3.13
 
 ## Setup
 
-1. **Venv and dependencies**
+### 1. Install Poetry
 
-   In terminal go to project's root folder and activate venv:
-   ```bash
-   python -m venv venv
-   ```
-   ```bash
-   source venv/bin/activate  # On macOS/Linux
-   venv\Scripts\activate  # On Windows
-   ```
-  
-   Install the necessary dependencies from `requirements.txt`:
+Ensure that Poetry is installed on your system. If it's not installed, you can install it using the following command:
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+```sh
+curl -sSL https://install.python-poetry.org | python3 -
+```
 
-3. **Create .env File**
+### 2. Install Dependencies
 
-   Create a `.env` file in the root directory of your project with the following variables:
+Navigate to your project's root directory and install the dependencies:
 
-   ```plaintext
-   OPENAI_API_KEY=<YOUR_KEY>
-   ```
+```sh
+poetry install
+```
 
-   If you would like to enable integration with LangSmith, add these additional variables:
+This command will create a virtual environment and install all required dependencies as specified in the `pyproject.toml` file.
 
-   ```plaintext
-   LANGCHAIN_API_KEY=<YOUR_KEY>
-   LANGCHAIN_TRACING_V2=true
-   LANGCHAIN_PROJECT=<YOUR_PROJECT_KEY>
-   LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
-   ```
+### 3. Activate the Virtual Environment
 
-4. **Run**
+To activate the virtual environment created by Poetry, use:
 
-   You need to add project's root path to your PYTHONPATH env variable. 
-   ```bash
-   export PYTHONPATH=/path/to/your/source:$PYTHONPATH  # On macOS/Linux
-   ```
-   For Windows first create path variable PYTHONPATH and add project's root folder
-  <img src="https://github.com/davespoon/grin-chat-bot/assets/19663851/56f8be8c-9b77-427f-8b77-0615b46a25b4" alt="path" width="25%">
+```sh
+poetry shell
+```
 
-   And finaly run:
-   
-   ```bash
-   python application/app.py
-   ```
+Alternatively, you can execute commands within the virtual environment without activating it:
 
-   Your chat should be available under http://127.0.0.1:5000
+```sh
+poetry run <command>
+```
 
-6. **Default Document**
+### 4. Create a `.env` File
 
-   By default, the project loads "The Ultimate History of Video Games" book by Steven L. Kent. You can ask any question regarding this exciting topic!
+Create a `.env` file in the root directory of your project with the following variables:
 
-7. **Customization**
+```env
+OPENAI_API_KEY=<YOUR_KEY>
+```
 
-   - **Constants File**: You can change values in the `constants.py` file to use a different URI for your document.
-   - **Data Folder**: Alternatively, upload your own documents to the `data` folder and load them from there.
+If you would like to enable integration with LangSmith, add these additional variables:
 
-8. **First Query**
+```env
+LANGCHAIN_API_KEY=<YOUR_KEY>
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_PROJECT=<YOUR_PROJECT_KEY>
+LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
+```
 
-   Note that because of initial creating vectore store, the first query may take longer to process, depending on the size of your documents. For example, the default video game history book is 624 pages long, so please be patient.
+### 5. Run the Application
 
-9. **Enjoy!**
+Set the `PYTHONPATH` environment variable to your project's root path:
+
+```sh
+export PYTHONPATH=$(pwd):$PYTHONPATH  # On macOS/Linux
+```
+
+For Windows, set the `PYTHONPATH` environment variable accordingly.
+
+Then, run the application:
+
+```sh
+poetry run python application/app.py
+```
+
+Your chat should be available at [http://127.0.0.1:5000](http://127.0.0.1:5000).
+
+### 6. Default Document
+
+By default, the project loads *The Ultimate History of Video Games* by Steven L. Kent. You can ask any questions regarding this exciting topic!
+
+### 7. Customization
+
+- **Constants File:** You can change values in the `constants.py` file to use a different URI for your document.
+- **Data Folder:** Alternatively, upload your own documents to the `data` folder and load them from there.
+
+### 8. First Query
+
+Note that because of the initial creation of the vector store, the first query may take longer to process, depending on the size of your documents. For example, the default video game history book is 624 pages long, so please be patient.
+
+### 9. Enjoy!
+
+By following these steps, your project will be set up using Poetry, streamlining dependency management and virtual environment handling.
