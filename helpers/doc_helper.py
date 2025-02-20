@@ -1,13 +1,19 @@
 import os
+from typing import Any
+
+from langchain_core.documents import Document
+
 import constants
 
 from langchain_community.document_loaders import PyPDFLoader, OnlinePDFLoader, TextLoader, CSVLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
+SUPPORTED_EXTENSIONS = ['.pdf', '.txt', '.csv']
 
-def load_documents(directory):
-    all_documents = []
-    modification_times = []
+
+def load_documents(directory: str) -> tuple[list[Document], list[float]]:
+    all_documents: list[Document] = []
+    modification_times: list[float] = []
 
     for fn in os.listdir(directory):
         file_path = os.path.join(directory, fn)
@@ -21,14 +27,15 @@ def load_documents(directory):
     return all_documents, modification_times
 
 
-def get_loader(file_path):
+def get_loader(file_path: str):
     _, ext = os.path.splitext(file_path)
-    if ext.lower() == '.pdf':
-        return PyPDFLoader(file_path)
-    elif ext.lower() == '.txt':
-        return TextLoader(file_path)
-    elif ext.lower() == '.csv':
-        return CSVLoader(file_path)
+    if ext.lower() in SUPPORTED_EXTENSIONS:
+        if ext.lower() == '.pdf':
+            return PyPDFLoader(file_path)
+        elif ext.lower() == '.txt':
+            return TextLoader(file_path)
+        elif ext.lower() == '.csv':
+            return CSVLoader(file_path)
     else:
         raise ValueError(f"Unsupported file type: {ext}")
 
@@ -45,14 +52,17 @@ def load_pdf(path):
 
 
 def split_text(documents):
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=constants.CHUNK_SIZE, chunk_overlap=constants.CHUNK_OVERLAP)
     chunks = text_splitter.split_documents(documents)
     return chunks
 
 
-def save_file(file):
+def save_file(file) -> str:
     if file:
-        filename = file.filename
-        file.save(os.path.join(constants.DATA_PATH, filename))
-        return filename
+        try:
+            filename = file.filename
+            file.save(os.path.join(constants.DATA_PATH, filename))
+            return filename
+        except Exception as e:
+            raise IOError(f"Failed to save file: {e}")
     return None

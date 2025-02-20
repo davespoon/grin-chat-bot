@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "grin-chat-bot"
+version = "0.1.0"
+description = ""
+authors = ["Dmytro Grinevych <dmitriy.grinevich.qa@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+annotated-types = "*"
+anyio = "*"
+blinker = "*"
+certifi = "*"
+click = "*"
+distro = "*"
+Flask = "*"
+h11 = "*"
+httpcore = "*"
+httpx = "*"
+idna = "*"
+itsdangerous = "*"
+Jinja2 = "*"
+MarkupSafe = "*"
+openai = "*"
+sniffio = "*"
+tqdm = "*"
+typing_extensions = "*"
+Werkzeug = "*"
+python-dotenv = "*"
+chromadb = "*"
+pypdf = "*"
+langchain = "*"
+langchain-community = "*"
+langchain-openai = "*"
+langsmith = "*"
+dependency-injector = "*"
+langchain-text-splitters = "*"
+langchain-core = "*"
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
