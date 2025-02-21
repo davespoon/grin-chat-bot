@@ -1,12 +1,18 @@
 import os
 from typing import Any
 
+from langchain.chains.openai_functions import create_extraction_chain
+from langchain_community.chat_models import ChatOpenAI
 from langchain_core.documents import Document
+from langchain_core.prompts import BasePromptTemplate
 
 import constants
 
 from langchain_community.document_loaders import PyPDFLoader, OnlinePDFLoader, TextLoader, CSVLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+import prompts.prompt_templates
+from prompts import schemas
 
 SUPPORTED_EXTENSIONS = ['.pdf', '.txt', '.csv']
 
@@ -25,6 +31,17 @@ def load_documents(directory: str) -> tuple[list[Document], list[float]]:
             modification_times.append(modification_time)
 
     return all_documents, modification_times
+
+
+def extract_resume_info(text, prompt_template):
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+    extraction_chain = create_extraction_chain(
+        schemas.resume_schema,
+        llm,
+        prompt_template)
+
+    structured_data = extraction_chain.run(text)
+    return structured_data
 
 
 def get_loader(file_path: str):
@@ -52,7 +69,8 @@ def load_pdf(path):
 
 
 def split_text(documents):
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=constants.CHUNK_SIZE, chunk_overlap=constants.CHUNK_OVERLAP)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=constants.CHUNK_SIZE,
+                                                   chunk_overlap=constants.CHUNK_OVERLAP)
     chunks = text_splitter.split_documents(documents)
     return chunks
 

@@ -1,3 +1,5 @@
+from helpers.doc_helper import extract_resume_info
+
 base_template = """
 Use the following context to answer the question at the end.
 If you don't know the answer, replay "I don't know", do not make up an answer.
@@ -19,4 +21,44 @@ Use the following pieces of retrieved context to answer the question.
 If you don't know the answer, just say that you don't know.
 Use three sentences maximum and keep the answer concise.
 {context}
+"""
+
+extract_resume_info_prompt = """
+You are an AI specialized in extracting structured information from resumes. Analyze the provided resume text and extract the following details in JSON format:
+
+- **name**: Full name of the candidate.
+- **email**: Email address.
+- **phone**: Phone number.
+- **summary**: A brief summary or objective statement of the candidate.
+- **education**: An array of educational qualifications, including degrees, institutions, and graduation dates.
+- **experience**: An array of work experiences, including job titles, company names, durations, and key responsibilities.
+- **skills**: An array of key skills and proficiencies relevant to the candidate's field.
+- **another_useful_information**: Any additional pertinent information not covered above, such as certifications, languages spoken, volunteer work, or notable projects.
+
+**Important Guidelines:**
+
+1. **No Assumptions**: Only extract information explicitly stated in the resume. If a specific detail is not present, omit that field from the JSON output.
+2. **Additional Information**: Include any other valuable details under "another_useful_information" to provide a comprehensive view of the candidate's qualifications.
+
+**Output Format:**
+
+```json
+{
+  "name": "Full Name",
+  "email": "email@example.com",
+  "phone": "123-456-7890",
+  "summary": "Brief summary or objective.",
+  "education": [
+    "Degree, Institution, Graduation Date"
+  ],
+  "experience": [
+    "Job Title, Company Name, Duration, Key Responsibilities"
+  ],
+  "skills": [
+    "Skill 1",
+    "Skill 2",
+    "Skill 3"
+  ],
+  "another_useful_information": "Additional pertinent details."
+}
 """
