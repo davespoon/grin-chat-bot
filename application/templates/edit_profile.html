@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Edit Profile</h1>
+    <form method="post" action="{{ url_for('edit_profile', profile_id=profile.id) }}">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ profile.name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="text" class="form-control" id="phone" name="phone" value="{{ profile.phone }}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ profile.email }}" required>
+        </div>
+        <div class="form-group">
+            <label for="summary">Summary/Profession:</label>
+            <input type="text" class="form-control" id="summary" name="summary" value="{{ profile.summary }}" required>
+        </div>
+        <div class="form-group">
+            <label for="skills">Skills (comma separated):</label>
+            <input type="text" class="form-control" id="skills" name="skills" value="{{ profile.skills | join(', ') }}">
+        </div>
+        <div class="form-group">
+            <label for="experience">Experience (comma separated):</label>
+            <input type="text" class="form-control" id="experience" name="experience"
+                   value="{{ profile.experience | join(', ') }}">
+        </div>
+        <div class="form-group">
+            <label for="education">Education (comma separated):</label>
+            <input type="text" class="form-control" id="education" name="education"
+                   value="{{ profile.education | join(', ') }}">
+        </div>
+        <div class="form-group">
+            <label for="another_info">Additional Info:</label>
+            <textarea class="form-control" id="another_info" name="another_info"
+                      rows="3">{{ profile.another_info }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+        <a href="{{ url_for('profiles') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
