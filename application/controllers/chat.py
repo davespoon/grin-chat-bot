@@ -6,10 +6,12 @@ from langchain_core.language_models import BaseChatModel
 from langchain_core.vectorstores import VectorStoreRetriever
 from openai import OpenAI
 
+import constants
 from application.response_handler import response
 from containers import Container
-from dto.ModelSettings import ModelSettings
 from helpers import doc_helper, config_helper
+from models.ModelSettings import ModelSettings
+from repositories.ProfileRepository import ProfileRepository
 
 
 def index():
@@ -40,6 +42,10 @@ def chat(
 def upload_file():
     file = request.files['file']
     filename = doc_helper.save_file(file)
+    docs, modification_times = doc_helper.load_documents(constants.DATA_PATH)
+    extracted_text = doc_helper.extract_resume_info(docs)
+    repo = ProfileRepository("profiles.db")
+    profile_id = repo.add_profile(extracted_text)
 
     if filename:
         return jsonify({'message': 'File uploaded successfully', 'filename': filename}), 200

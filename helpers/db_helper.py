@@ -5,7 +5,9 @@ from datetime import datetime
 from langchain_community.vectorstores import Chroma
 
 import constants
+import prompts.prompt_templates
 from helpers import doc_helper
+from repositories.ProfileRepository import ProfileRepository
 
 
 def get_retriever(vectorsotore, search_type, search_kwargs):
@@ -15,8 +17,6 @@ def get_retriever(vectorsotore, search_type, search_kwargs):
 def get_chroma_db(embedding_model, persist_directory):
     last_update_time = get_last_update_time(persist_directory)
     docs, modification_times = doc_helper.load_documents(constants.DATA_PATH)
-
-    extracted_text = doc_helper.extract_resume_info(docs)
 
     if should_update_db(last_update_time, modification_times):
         new_docs = filter_new_documents(docs, modification_times, last_update_time)

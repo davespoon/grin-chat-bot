@@ -1,18 +1,14 @@
 import os
-from typing import Any
 
-from langchain.chains.openai_functions import create_extraction_chain
 from langchain_community.chat_models import ChatOpenAI
-from langchain_core.documents import Document
-from langchain_core.prompts import BasePromptTemplate
-
-import constants
-
 from langchain_community.document_loaders import PyPDFLoader, OnlinePDFLoader, TextLoader, CSVLoader
+from langchain_core.documents import Document
+from langchain_core.output_parsers import PydanticOutputParser
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-import prompts.prompt_templates
-from prompts import schemas
+import constants
+from models.PersonProfile import PersonProfile
+from prompts import prompt_templates
 
 SUPPORTED_EXTENSIONS = ['.pdf', '.txt', '.csv']
 
@@ -33,14 +29,14 @@ def load_documents(directory: str) -> tuple[list[Document], list[float]]:
     return all_documents, modification_times
 
 
-def extract_resume_info(text, prompt_template):
+def extract_resume_info(text):
     llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
-    extraction_chain = create_extraction_chain(
-        schemas.resume_schema,
-        llm,
-        prompt_template)
+    prompt = prompt_templates.extract_info_from_cv
+    parser = PydanticOutputParser(pydantic_object=PersonProfile)
+    prompt = prompt.partial(format_instructions=parser.get_format_instructions())
+    extraction_chain = prompt | llm | parser
 
-    structured_data = extraction_chain.run(text)
+    structured_data = extraction_chain.invoke({"cv_text": text})
     return structured_data
 
 
