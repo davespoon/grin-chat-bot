@@ -7,7 +7,7 @@ from langchain_core.output_parsers import PydanticOutputParser
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 import constants
-from models.PersonProfile import PersonProfile
+from models.llm_models.PerfonProfileExtract import PersonProfileExtract
 from prompts import prompt_templates
 
 SUPPORTED_EXTENSIONS = ['.pdf', '.txt', '.csv']
@@ -32,7 +32,7 @@ def load_documents(directory: str) -> tuple[list[Document], list[float]]:
 def extract_resume_info(text):
     llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
     prompt = prompt_templates.extract_info_from_cv
-    parser = PydanticOutputParser(pydantic_object=PersonProfile)
+    parser = PydanticOutputParser(pydantic_object=PersonProfileExtract)
     prompt = prompt.partial(format_instructions=parser.get_format_instructions())
     extraction_chain = prompt | llm | parser
 

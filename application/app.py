@@ -25,8 +25,7 @@ def flask_app() -> Flask:
     app.add_url_rule("/profiles", "profiles", profiles.index, methods=['GET'])
     app.add_url_rule("/profiles/upload", "upload_profile", profiles.upload_profile, methods=['POST'])
     app.add_url_rule("/profiles/<int:profile_id>/delete", "delete_profile", profiles.delete_profile, methods=['POST'])
-    # app.add_url_rule("/profiles/<int:profile_id>/edit", "edit_profile", profiles.edit_profile, methods=['GET'])
-    # app.add_url_rule("/profiles/<int:profile_id>/update", "update_profile", profiles.update_profile, methods=['POST'])
+    app.add_url_rule("/profiles/<int:profile_id>/edit", "edit_profile", profiles.edit_profile, methods=['GET', 'POST'])
     return app
 
 

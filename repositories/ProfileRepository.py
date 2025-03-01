@@ -2,8 +2,8 @@
 from sqlalchemy.orm import Session
 from typing import List, Optional
 
-from models.PersonProfile import PersonProfile
-from models.DbProfile import DbProfile
+from models.db_models.DbProfile import DbProfile
+from models.entities.PersonProfile import PersonProfile
 
 
 class ProfileRepository:
@@ -35,6 +35,7 @@ class ProfileRepository:
         if profile:
             # Merge the two parts into one dict for the Pydantic model.
             data = {
+                "id": profile.id,
                 "name": profile.name,
                 "phone": profile.phone,
                 "email": profile.email,

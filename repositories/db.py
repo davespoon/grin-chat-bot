@@ -2,8 +2,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from models.DbProfile import Base, DbProfile
-from models.PersonProfile import PersonProfile
+from models.db_models.DbProfile import Base, DbProfile
 
 DATABASE_URL = "sqlite:///profiles.db"
 

@@ -10,7 +10,7 @@ import constants
 from application.response_handler import response
 from containers import Container
 from helpers import doc_helper, config_helper
-from models.ModelSettings import ModelSettings
+from models.llm_models.ModelSettings import ModelSettings
 from repositories.ProfileRepository import ProfileRepository
 
 

@@ -1,5 +1,6 @@
+from typing import Optional, List
+
 from pydantic import BaseModel, Field
-from typing import List, Optional
 
 
 class PersonProfile(BaseModel):

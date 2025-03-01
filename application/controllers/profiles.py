@@ -2,7 +2,7 @@ from flask import render_template, request, jsonify, flash, redirect, url_for
 
 import constants
 from helpers import doc_helper
-from models.PersonProfile import PersonProfile
+from models.entities.PersonProfile import PersonProfile
 from repositories.ProfileRepository import ProfileRepository
 from repositories.db import SessionLocal
 
@@ -94,45 +94,50 @@ def delete_profile(profile_id):
         flash("Profile not found.", "danger")
     return redirect(url_for("profiles"))
 
-# def edit_profile(profile_id):
-#     """Display an edit form pre-filled with profile data."""
-#     session = SessionLocal()
-#     repo = ProfileRepository(session)
-#     data = repo.get_profile(profile_id)
-#     session.close()
-#     if not data:
-#         flash("Profile not found.", category="danger")
-#         return redirect(url_for("profiles"))
-#     try:
-#         profile = PersonProfile.parse_obj(data)
-#         # Inject the profile id so it can be used in URLs.
-#         profile.id = profile_id
-#     except Exception as e:
-#         flash(f"Error loading profile: {str(e)}", category="danger")
-#         return redirect(url_for("profiles"))
-#     return render_template("edit_profile.html", profile=profile, profile_id=profile_id)
-#
-#
-# def update_profile(profile_id):
-#     """Update an existing profile with data submitted from the edit form."""
-#     # Get form data from POST
-#     form_data = request.form.to_dict()
-#     # For fields that are lists (e.g., skills), we assume comma-separated input.
-#     for field in ["skills", "experience", "education"]:
-#         if field in form_data:
-#             form_data[field] = [item.strip() for item in form_data[field].split(",") if item.strip()]
-#     try:
-#         profile = PersonProfile(**form_data)
-#     except Exception as e:
-#         flash("Invalid data: " + str(e), category="danger")
-#         return redirect(url_for("edit_profile", profile_id=profile_id))
-#
-#     session = SessionLocal()
-#     repo = ProfileRepository(session)
-#     success = repo.update_profile(profile_id, profile.dict())
-#     session.close()
-#     if success:
-#         flash("Profile updated successfully.", category="success")
-#     else:
-#         flash("Failed to update profile.", category="danger")
-#     return redirect(url_for("profiles"))
+
+def edit_profile(profile_id):
+    """
+    Handles editing a profile.
+      - GET: Retrieves the profile and renders the edit form.
+      - POST: Validates the submitted form data and updates the profile.
+    """
+    session = SessionLocal()
+    repo = ProfileRepository(session)
+
+    if request.method == 'POST':
+        # Retrieve updated data from the form
+        # For simplicity, we expect comma-separated lists for skills, experience, and education.
+        updated_data = {
+            "name": request.form.get("name"),
+            "phone": request.form.get("phone"),
+            "email": request.form.get("email"),
+            "summary": request.form.get("summary"),
+            "skills": [s.strip() for s in request.form.get("skills", "").split(",") if s.strip()],
+            "experience": [e.strip() for e in request.form.get("experience", "").split(",") if e.strip()],
+            "education": [ed.strip() for ed in request.form.get("education", "").split(",") if ed.strip()],
+            "another_info": request.form.get("another_info")
+        }
+        try:
+            # Validate using the Pydantic model
+            updated_profile = PersonProfile.model_validate(updated_data)
+        except Exception as e:
+            session.close()
+            flash("Profile update failed: " + str(e), "danger")
+            return redirect(url_for("edit_profile", profile_id=profile_id))
+
+        # Update the profile in the database
+        success = repo.update_profile(profile_id, updated_profile)
+        session.close()
+        if success:
+            flash("Profile updated successfully.", "success")
+        else:
+            flash("Profile update failed. Profile not found.", "danger")
+        return redirect(url_for("profiles"))
+    else:
+        # GET request: Retrieve the profile and render the edit form.
+        profile = repo.get_profile(profile_id)
+        session.close()
+        if profile is None:
+            flash("Profile not found.", "danger")
+            return redirect(url_for("profiles"))
+        return render_template("edit_profile.html", profile=profile)
